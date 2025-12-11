@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Register User | Easy Bid</title>
+    <meta name="description" content="" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="10x10" href="../assets/easy-bid.png" />
+    <link rel="stylesheet" href="../styles/css/style.css" />
+  </head>
+
+  <body class="min-vh-100 d-flex flex-column">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid my-navbar-container">
+          <a class="navbar-brand" href="../index.html">
+            <img src="../assets/easy-bid.png" alt="Logo" width="90" height="70" class="me-2" />
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+            </ul>
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="login.html">Sign in</a></li>
+              <li class="nav-item"><a class="nav-link active" href="register.html">Register</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="header-image">
+        <img src="../assets/register/pc-ipad-iphone.jpg" alt="register-page" />
+      </div>
+    </header>
+    <main class="container d-flex align-items-center justify-content-center mt-5">
+      <div class="card shadow p-4 mb-3 register-box">
+        <form id="login-form">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name*</label>
+            <input class="form-control" type="name" id="name" pattern="^[a-zA-Z0-9_]+$" title="only letters, numbers, and underscores are allowed" required />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email*</label>
+            <input class="form-control" type="email" id="email" pattern="^[a-zA-Z0-9._%+\-]+@stud\.noroff\.no$" title="The email value must be a valid stud.noroff.no email address" required />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password*</label>
+            <input class="form-control" type="password" id="password" minlength="8" title="Password must be at least 8 characters long." required />
+          </div>
+          <div class="mb-3">
+            <label for="bio" class="form-label">Bio</label>
+            <input class="form-control" type="text" id="bio" />
+          </div>
+          <div class="mb-3">
+            <label for="avatarUrl" class="form-label">Avatar URL</label>
+            <input class="form-control" type="text" id="avatarUrl" />
+          </div>
+          <div class="mb-3">
+            <label for="avatarAltText" class="form-label">Avatar Alt Text</label>
+            <input class="form-control" type="text" id="avatarAltText" />
+          </div>
+          <div class="mb-3">
+            <label for="bannerUrl" class="form-label">Banner URL</label>
+            <input class="form-control" type="text" id="bannerUrl" />
+          </div>
+          <div class="mb-3">
+            <label for="bannerAltText" class="form-label">Banner Alt Text</label>
+            <input class="form-control" type="text" id="bannerAltText" />
+          </div>
+          <button type="submit" class="btn btn-primary w-100 mt-5">Register</button>
+          <div class="row">
+            <p id="errorMessage"></p>
+          </div>
+          <div class="text-center mt-1">
+            <a href="login.html">Already have an account? Sign In !</a>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center my-4">
+          <span class="spinner-border d-none" id="loading-spinner" role="status" aria-hidden="false"></span>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-primary text-white py-4 mt-auto w-100">
+      <a class="mb-0 text-dark mx-3" href="../index.html">Home</a>
+    </footer>
+    <script type="module" src="../js/login-main.js"></script>
+    <script type="module" src="../js/register-main.js"></script>
+  </body>
+</html>

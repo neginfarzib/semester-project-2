@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>User Profile | Easy Bid</title>
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="10x10" href="../assets/easy-bid.png">
+    <link rel="stylesheet" href="../styles/css/style.css">
+</head>
+
+<body class="min-vh-100 d-flex flex-column">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container-fluid my-navbar-container">
+                <a class="navbar-brand" href="../index.html">
+                    <img src="../assets/easy-bid.png" alt="Logo" width="90" height="70" class="me-2">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="../account/profile.html"
+                                id="user-name"></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" id="user-logout" href="../account/login.html">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container d-flex align-items-center justify-content-center min-vh-100 mt-5">
+        <div class="card shadow p-4 mb-3 register-box">
+            <form id="profile-form">
+
+                <div class="mb-3">
+                    <label for="profile-name" class="form-label">Name</label>
+                    <input class="form-control" type="name" id="profile-name" pattern="^[a-zA-Z0-9_]+$"
+                        title="only letters, numbers, and underscores are allowed" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="profile-email" class="form-label">Email</label>
+                    <input class="form-control" type="email" id="profile-email"
+                        pattern="^[a-zA-Z0-9._%+\-]+@stud\.noroff\.no$"
+                        title="The email value must be a valid stud.noroff.no email address" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="profile-bio" class="form-label">Bio</label>
+                    <input class="form-control" type="text" id="profile-bio">
+                </div>
+
+                <div class="mb-3">
+                    <label for="profile-avatarUrl" class="form-label">Avatar URL</label>
+                    <input class="form-control" type="text" id="profile-avatarUrl">
+                </div>
+
+                <div class="mb-3">
+                    <label for="profile-avatarAltText" class="form-label">Avatar Alt Text</label>
+                    <input class="form-control" type="text" id="profile-avatarAltText">
+                </div>
+
+                <div class="mb-3">
+                    <label for="profile-bannerUrl" class="form-label">Banner URL</label>
+                    <input class="form-control" type="text" id="profile-bannerUrl">
+                </div>
+
+                <div class="mb-3">
+                    <label for="profile-bannerAltText" class="form-label">Banner Alt Text</label>
+                    <input class="form-control" type="text" id="profile-bannerAltText">
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-5">Save Changes</button>
+                <div class="row">
+                    <p id="errorMessage"></p>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer class="bg-primary text-white py-4 mt-auto w-100">
+        <a class="mb-0 text-dark mx-3" href="../index.html">Home</a>
+    </footer>
+    <script>
+        let name = localStorage.getItem('name');
+
+        const userNameElement = document.getElementById('user-name');
+        if (userNameElement) {
+            userNameElement.textContent = name;
+        }
+    </script>
+    <script type="module" src="../js/profile-main.js"></script>
+</body>
+
+</html>

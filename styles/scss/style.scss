@@ -1,0 +1,160 @@
+@use '../../node_modules/bootstrap/scss/bootstrap';
+@use 'my_variables' as *;
+
+.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    border-color: darken($primary-color, 10%);
+  }
+  color: #fff;
+}
+
+
+.logo {
+  width: 1.5rem;
+  display: none;
+  height: 40px;
+  margin-right: 5px;
+}
+
+body {
+  padding-top: $navbar-height;  
+}
+
+.header-image {
+  height: 400px;         
+  overflow: hidden;      
+  margin-top: 0;
+
+  img {
+    width: 100%;
+    height: 100%;        
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.my-navbar-container {
+  background-color: $primary-color;
+}
+
+.bg-primary {
+  background-color: $primary-color !important;
+}
+
+.login-box {
+  max-width: 600px;
+  width: 100%;
+  border: 3px solid $primary-color;
+  min-height: 450px;
+}
+.register-box {
+  max-width: 900px;
+  width: 100%;
+  border: 3px solid $primary-color;
+  min-height: 600px;
+}
+
+.edit-post-box {
+  max-width: 900px;
+  width: 100%;
+  border: 3px solid $primary-color;
+  min-height: 600px;
+}
+.create-post-btn {
+  margin: 50px;
+  background-color: #f3f2f2;
+  border: none;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 200px;
+}
+
+.edit-profile-btn {
+  margin: 50px;
+  background-color: #f3f2f2;
+  border: none;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+}
+
+#user-all-posts-follow-btn {
+  margin: 10px;
+  background-color: #f3f2f2;
+  border: none;
+  padding: 14px 24px;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
+  gap: 20px;
+  min-width: 200px;
+}
+
+.edit-line-separator {
+  background-color: $primary-color;
+  width: 100%;
+  margin: 10px 0;
+  height: 5px;
+}
+
+.navbar-nav .nav-link.active {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Inputs */
+input.form-control {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+}
+
+/* Textareas */
+textarea.form-control {
+  font-family: 'Georgia', serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#blog-listing-details-body {
+  white-space: pre-wrap; 
+  word-wrap: break-word; 
+}
+
+.banner-wrapper {
+  width: 100%;
+  height: 250px;
+  overflow: relative;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+
+  bottom: -30px;
+  left: 40px;
+}

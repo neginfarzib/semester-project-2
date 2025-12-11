@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>All Listings | Easy Bid</title>
+    <meta name="description" content="" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="10x10" href="../assets/easy-bid.png" />
+    <link rel="stylesheet" href="../styles/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  </head>
+
+  <body class="min-vh-100 d-flex flex-column">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid my-navbar-container">
+          <a class="navbar-brand" href="../index.html">
+            <img src="../assets/easy-bid.png" alt="Logo" width="90" height="70" class="me-2" />
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link active" href="../index.html">Home</a></li>
+            </ul>
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" id="user-name" href="../account/login.html">Sign in</a></li>
+              <li class="nav-item"><a class="nav-link" id="user-logout" href="../account/register.html">Register</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="header-image">
+        <img src="../assets/landing-page/gavel-pc.jpg" alt="landing-page" />
+      </div>
+    </header>
+
+    <main class="container flex-grow-1 d-flex align-items-center justify-content-center mt-5">
+      <div class="min-vh-100 d-flex flex-column w-100">
+        <div class="row">
+          <p id="errorMessage"></p>
+        </div>
+        <div id="listing-container"></div>
+      </div>
+    </main>
+
+    <footer class="bg-primary text-white py-4 mt-auto w-100">
+      <p class="mb-0 text-dark mx-5">Home</p>
+    </footer>
+    <script>
+      let name = localStorage.getItem("name");
+      if (name !== null && name !== "") {
+        const userNameElement = document.getElementById("user-name");
+        if (userNameElement) {
+          userNameElement.textContent = name;
+          userNameElement.href = "../account/profile.html";
+        }
+
+        const userLogoutElement = document.getElementById("user-logout");
+        if (userLogoutElement) {
+          userLogoutElement.textContent = "Logout";
+          userLogoutElement.href = "../account/login.html";
+        }
+      }
+    </script>
+    <script type="module" src="js/all-listing-main.js"></script>
+  </body>
+</html>

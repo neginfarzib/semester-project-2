@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>User Posts | Butterfly Forum</title>
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="10x10" href="../assets/butterfly-icon.svg">
+    <link rel="stylesheet" href="../styles/css/style.css">
+</head>
+
+<body class="min-vh-100 d-flex flex-column">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid my-navbar-container">
+                <a class="navbar-brand" href="../index.html">
+                    <img src="../assets/butterfly-icon.svg" alt="Logo" width="90" height="70" class="me-2">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="../index.html">Home</a></li>
+
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="../account/profile.html">Sign in</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../account/login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <div class="container mt-5">
+                <h3 id="user-all-post-title">All Posts</h3>
+                <div class="w-100 my-2" style="background-color: #CC7EB5; height: 5px;"></div>
+                <div class="d-flex justify-content-end mb-3">
+                    <button id="user-all-posts-follow-btn" type="button" value="fallow-unfollow">Follow</button>
+                </div>
+                <div class="row">
+                    <p id="errorMessage"></p>
+                </div>
+                <div id="user-posts-thumbnail">
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="row-footer">
+        <div class="footr-column">
+            <a href="../index.html">Home</a>
+            <a href="">Terms & Condition</a>
+        </div>
+    </footer>
+    <script>
+        let name = localStorage.getItem('name');
+
+        if (name) {
+            const userNameElement = document.getElementById('user-name');
+            if (userNameElement) {
+                userNameElement.textContent = name;
+            }
+        }
+    </script>
+    <script type="module" src="../js/user-posts-main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login | Easy Bid</title>
+    <meta name="description" content="" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="10x10" href="../assets/easy-bid.png" />
+    <link rel="stylesheet" href="../styles/css/style.css" />
+    <script>
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("name");
+    </script>
+  </head>
+
+  <body class="min-vh-100 d-flex flex-column">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid my-navbar-container">
+          <a class="navbar-brand" href="../index.html">
+            <img src="../assets/easy-bid.png" alt="Logo" width="90" height="70" class="me-2" />
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+            </ul>
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link active" href="login.html">Sign in</a></li>
+              <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="header-image">
+        <img src="../assets/login/computer-desk.jpg" alt="login-page" />
+      </div>
+    </header>
+    <main class="container flex-grow-1 d-flex align-items-center justify-content-center mt-5">
+      <div class="card shadow p-4 mb-3 login-box">
+        <form id="login-form">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input class="form-control" type="email" id="email" pattern="^[a-zA-Z0-9._%+\-]+@stud\.noroff\.no$" title="The email value must be a valid stud.noroff.no email address" required />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input class="form-control" type="password" id="password" minlength="8" title="Password must be at least 8 characters long." required />
+          </div>
+          <button type="submit" class="btn btn-primary w-100 mt-5">Sign in</button>
+          <div class="row">
+            <p id="errorMessage"></p>
+          </div>
+          <div class="text-center mt-1">
+            <a href="register.html">Don’t have an account? Register Now!</a>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center my-4">
+          <span class="spinner-border d-none" id="loading-spinner" role="status" aria-hidden="false"></span>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-primary text-white py-4 mt-auto w-100">
+      <p class="mb-0 text-dark mx-5">Home</p>
+    </footer>
+
+    <script type="module" src="../js/login-main.js"></script>
+  </body>
+</html>
