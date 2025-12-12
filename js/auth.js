@@ -68,6 +68,7 @@ async function sendAuthRequest(endpoint, data) {
  */
 async function sendAuthRequestUpdateUserProfile(endpoint, data) {
   try {
+    console.log('sendAuthRequestUpdateUserProfile', data);
     const response = await fetch(base_url + endpoint, {
       method: 'PUT',
       headers: {
@@ -83,7 +84,7 @@ async function sendAuthRequestUpdateUserProfile(endpoint, data) {
       const token = result.data.accessToken;
       const nameApi = result.data.name;
 
-      window.location.href = '../post/manage-all-post.html';
+      window.location.href = '../account/profile.html';
     } else {
       const error = await response.json();
       let messages = '';

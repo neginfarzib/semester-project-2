@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const blogListing = await getBlogListing(listingId);
     console.log(blogListing);
-
     // Replace skeleton with real content
     blogListingContainer.innerHTML = `
       <div class="card shadow w-75 mx-auto my-5 p-4">
@@ -76,14 +75,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div id="blog-listing-details-img-second" class="d-flex flex-wrap mb-4"></div>
         <div class="public-listing-text-container">
           <pre class="fs-5" id="blog-listing-details-body"></pre>
-          <div class="d-flex justify-content-between mt-4">
+          <div class="d-flex flex-column justify-content-between mt-4">
             <div class="d-flex align-items-center">
-              <span class="fw-bold me-1 fs-5">By:</span>
-              <span id="blog-listing-details-author" class="fs-5 text-dark"></span>          
+              <span class="fw-bold me-1 fs-6">By:</span>
+              <span id="blog-listing-details-author" class="fs-6 text-dark"></span>          
             </div>
             <div class="d-flex align-items-center">
-              <span class="fw-bold me-1 fs-5">Published on:</span>
-              <span id="blog-listing-details-publish-date" class="fs-5 text-secondary"></span>
+              <span class="fw-bold me-1 fs-6">Published on:</span>
+              <span id="blog-listing-details-publish-date" class="fs-6 text-secondary"></span>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="fw-bold me-1 fs-6">End At:</span>
+              <span id="blog-listing-details-end-date" class="fs-6 text-secondary"></span>
             </div>
           </div>
           <div id="bids-container" class="mt-4">
@@ -91,12 +94,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             <ul id="bids-list" class="list-group list-group-flush">
             </ul>
         </div>
+        <form id="index-listing-bid-form">
+          <div class="d-flex align-items-center gap-2 mt-4">
+            <input type="hidden" id="index-listing-id">
+            <button type="submit" class="btn btn-primary">Place a bid</button>
+            <input type="number" id="bid-amount" class="form-control" placeholder="Enter your bid" min="1" style="width: 150px;">
         </div>
+       </form>
       </div>
     `;
 
     // Fill data as before
     document.getElementById("blog-listing-details-title").textContent = blogListing.title;
+    document.getElementById("index-listing-id").value = listingId;
 
     if (blogListing.media && blogListing.media.length > 0) {
       const mainImg = document.getElementById("blog-listing-details-img");
@@ -125,7 +135,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             const oldSrc = mainImg.src;
             const oldAlt = mainImg.alt;
 
-    
             mainImg.src = item.url;
             mainImg.alt = item.alt;
 
@@ -144,9 +153,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("blog-listing-details-body").textContent = blogListing.description;
     document.getElementById("blog-listing-details-author").textContent = blogListing.seller.name;
 
-    const date = new Date(blogListing.created);
-    document.getElementById("blog-listing-details-publish-date").textContent = date.toLocaleDateString("en-US", localDateTime);
-    document.getElementById("blog-listing-details-publish-date").textContent = dayjs(date).format("YYYY-MM-DD HH:mm");
+    const createdDate = new Date(blogListing.created);
+    const endDate = new Date(blogListing.endsAt);
+    document.getElementById("blog-listing-details-publish-date").textContent = createdDate.toLocaleDateString("en-US", localDateTime);
+    document.getElementById("blog-listing-details-publish-date").textContent = dayjs(createdDate).format("YYYY-MM-DD HH:mm");
+    document.getElementById("blog-listing-details-end-date").textContent = dayjs(endDate).format("YYYY-MM-DD HH:mm");
 
     const bidsList = document.getElementById("bids-list");
     if (blogListing.bids && blogListing.bids.length > 0) {
@@ -172,7 +183,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         listItem.appendChild(dateSpan);
 
         const bidsListSpan = document.createElement("span");
-        bidsListSpan.classList.add("badge", "bg-primary", "rounded-pill");
+        bidsListSpan.classList.add("text-muted", "small");
         bidsListSpan.textContent = `${bid.amount} credit`;
         listItem.appendChild(bidsListSpan);
 
@@ -183,6 +194,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       noBidsItem.classList.add("list-group-item", "text-muted");
       noBidsItem.textContent = "No bids placed yet.";
       bidsList.appendChild(noBidsItem);
+    }
+
+    // handling form submit
+    const indexListingBidForm = document.getElementById("index-listing-bid-form");
+    if (indexListingBidForm) {
+      document.getElementById("index-listing-bid-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const bidAmount = document.getElementById("bid-amount").value.trim();
+        console.log("<<<<<<<" + bidAmount);
+      });
     }
   } catch (error) {
     console.error("Error loading listing details:", error);

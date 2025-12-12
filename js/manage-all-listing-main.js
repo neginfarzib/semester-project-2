@@ -220,8 +220,14 @@ async function setProfileData(){
   const userEmailElement = document.getElementById('user-email');
   const userBioElement = document.getElementById('user-bio');
   const userCreditElement = document.getElementById('user-credit');
+  const userBannerElement = document.getElementById('profile-banner');
+  const userAvatarElement = document.getElementById('profile-avatar');
   usernameElement.textContent = userProfile?.name;
   userEmailElement.textContent = userProfile?.email;
   userBioElement.textContent = userProfile?.bio;
   userCreditElement.textContent = 'Credits: ' + userProfile?.credits;
+  userBannerElement.src = userProfile.avatar?.url;
+  userBannerElement.alt = userProfile.avatar?.alt;
+  userAvatarElement.src = userProfile.banner?.url;
+  userAvatarElement.alt = userProfile.banner?.alt;
 }
