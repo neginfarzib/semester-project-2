@@ -83,7 +83,7 @@ export async function allListings() {
 }
 
 /**
- * Searching in posts for the input term
+ * Searching in listing for the input term
  * @param {string} searchInput - input term to search
  * @return {Promise<object[]>} array of post fetched from API-server
  * */
@@ -96,7 +96,7 @@ export async function searchListingAPI(searchInput) {
         'X-Noroff-API-Key': '4f20fb44-3b03-4fc3-bc21-5a7fb98d9816',
       },
     };
-    const url = `${base_url}/social/posts/search?q=${searchInput}`;
+    const url = `${base_url}/auction/listings/search?q=${searchInput}`;
     const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
