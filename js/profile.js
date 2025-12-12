@@ -6,6 +6,10 @@ const base_url = 'https://v2.api.noroff.dev';
 export async function fetchUserProfile() {
   try {
     const nameUser = localStorage.getItem('name');
+    if(!nameUser){
+      console.warn('User is not authenticated yet')
+      return;
+    }
     const url = `${base_url}/auction/profiles/${nameUser}`;
 
     const response = await fetch(url, {

@@ -170,7 +170,7 @@ export async function allUsersBids(nameOfUser) {
       },
     };
 
-    const url = `${base_url}/auction/profiles/${nameOfUser}/bids`;
+    const url = `${base_url}/auction/profiles/${nameOfUser}/bids?_listings=true`;
     const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);

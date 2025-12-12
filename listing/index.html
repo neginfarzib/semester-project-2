@@ -1,85 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Listing Details | Easy Bid</title>
-    <meta name="description" content="">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="10x10" href="../assets/easy-bid.png">
-    <link rel="stylesheet" href="../styles/css/style.css">
+    <meta name="description" content="" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="10x10" href="../assets/easy-bid.png" />
+    <link rel="stylesheet" href="../styles/css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script type="module" src="../js/listing-details-main.js"></script>
-</head>
+  </head>
 
-<body class="min-vh-100 d-flex flex-column">
+  <body class="min-vh-100 d-flex flex-column">
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <div class="container-fluid my-navbar-container">
-                <a class="navbar-brand" href="../index.html">
-                    <img src="../assets/easy-bid.png" alt="Logo" width="90" height="70" class="me-2">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid my-navbar-container">
+          <a class="navbar-brand" href="../index.html">
+            <img src="../assets/easy-bid.png" alt="Logo" width="90" height="70" class="me-2" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link active" href="../index.html">Home</a></li>
-
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="../account/login.html">Sign in</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../account/login.html">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+          <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link active" href="../index.html">Home</a></li>
+            </ul>
+            <ul class="navbar-nav align-items-center">
+              <li class="nav-item"><a class="nav-link" id="user-credit"></a></li>
+              <li class="nav-item"><a class="nav-link" id="user-name" href="../account/login.html">Sign in</a></li>
+              <li class="nav-item"><a class="nav-link" id="user-logout" href="../account/register.html">Register</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
     <main class="container flex-grow-1 d-flex align-items-center justify-content-center mt-5">
-        <section id="blog-listing-container" class="w-100">
-            <div class="card shadow w-75 mx-auto my-5 p-4">
-                <h2 id="blog-listing-details-title"></h2>
-                <img id="blog-listing-details-img" src="" alt="">
-                <div class="public-listing-text-container">
-                    <pre class="fs-5" id="blog-listing-details-body"></pre>
-                    <div class="d-flex justify-content-between mt-4">
-                        <div class="d-flex align-items-center">
-                            <span class="fw-bold me-1 fs-3">By:</span>
-                                <span id="blog-listing-details-author" class="fs-5 text-dark"></span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <span class="fw-bold me-1 fs-3">Published on:</span>
-                            <span id="blog-listing-details-publish-date" class="fs-5 text-secondary"></span>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="mt-4">Bids:</h3>
-                        <ul id="bids-list" class="list-group list-group-flush"></ul
-                    </div>
-                    <div>
-                        <button>Place a bid</button>
-                    </div>
-                </div>
+      <section id="blog-listing-container" class="w-100">
+        <div class="card shadow w-75 mx-auto my-5 p-4">
+          <h2 id="blog-listing-details-title"></h2>
+          <img id="blog-listing-details-img" src="" alt="" />
+          <div class="public-listing-text-container">
+            <pre class="fs-5" id="blog-listing-details-body"></pre>
+            <div class="d-flex justify-content-between mt-4">
+              <div class="d-flex align-items-center">
+                <span class="fw-bold me-1 fs-3">By:</span>
+                <span id="blog-listing-details-author" class="fs-5 text-dark"></span>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="fw-bold me-1 fs-3">Published on:</span>
+                <span id="blog-listing-details-publish-date" class="fs-5 text-secondary"></span>
+              </div>
             </div>
-        </section>
+            <div>
+              <h3 class="mt-4">Bids:</h3>
+              <ul id="bids-list" class="list-group list-group-flush"></ul>
+            </div>
+            <div>
+              <button>Place a bid</button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <footer class="bg-primary text-white py-4 mt-auto w-100">
-        <p class="mb-0 text-dark mx-5">Home</p>
+      <p class="mb-0 text-dark mx-5">Home</p>
     </footer>
     <script>
-        let name = localStorage.getItem('name');
-
-        const registerNavElement = document.getElementById('register-nav');
-
-        const userNameElement = document.getElementById('user-name');
-        if (userNameElement && localStorage.getItem('accessToken')) {
-            userNameElement.textContent = name;
-            registerNavElement.textContent = 'Logout'
-            registerNavElement.href = '../account/login.html'
+      let name = localStorage.getItem("name");
+      if (name !== null && name !== "") {
+        const userNameElement = document.getElementById("user-name");
+        if (userNameElement) {
+          userNameElement.textContent = name;
+          userNameElement.href = "../account/profile.html";
         }
-    </script>
-</body>
 
+        const userLogoutElement = document.getElementById("user-logout");
+        if (userLogoutElement) {
+          userLogoutElement.textContent = "Logout";
+          userLogoutElement.href = "../account/login.html";
+        }
+      }
+    </script>
+  </body>
 </html>

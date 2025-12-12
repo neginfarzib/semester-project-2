@@ -1,4 +1,4 @@
-const base_url = 'https://v2.api.noroff.dev';
+const base_url = "https://v2.api.noroff.dev";
 
 /**
  * Send authentication request (register or login).
@@ -9,55 +9,50 @@ const base_url = 'https://v2.api.noroff.dev';
 async function sendAuthRequest(endpoint, data) {
   try {
     const response = await fetch(base_url + endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     });
 
     if (response.ok) {
       const result = await response.json();
       const token = result.data.accessToken;
       const nameApi = result.data.name;
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('name');
-      localStorage.setItem('accessToken', token);
-      localStorage.setItem('name', nameApi);
+      const email = result.data.email;
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("name");
+      localStorage.removeItem("email");
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("name", nameApi);
+      localStorage.setItem("email", email);
 
-      const callbackLocation = localStorage.getItem('callbackLocation');
+      const callbackLocation = localStorage.getItem("callbackLocation");
 
       if (callbackLocation !== null) {
-        localStorage.removeItem('callbackLocation');
+        localStorage.removeItem("callbackLocation");
         window.location.href = callbackLocation;
-      } else if (endpoint.includes('register')) {
-        alert('Registration successful!');
-        window.location.href = '../account/login.html';
+      } else if (endpoint.includes("register")) {
+        alert("Registration successful!");
+        window.location.href = "../account/login.html";
       } else {
-        window.location.href = '../index.html';
+        window.location.href = "../index.html";
       }
     } else {
       const error = await response.json();
-      let messages = '';
+      let messages = "";
       for (let i = 0; i < error.errors.length; i++) {
-        messages += error.errors[i].message + '<br>';
+        messages += error.errors[i].message + "<br>";
       }
-      messages =
-        !messages || messages.length === 0
-          ? 'An error occurred. Please try again '
-          : messages;
+      messages = !messages || messages.length === 0 ? "An error occurred. Please try again " : messages;
 
-      const errorMessageElement = document.getElementById('errorMessage');
-      errorMessageElement.classList.add(
-        'alert',
-        'alert-danger',
-        'mt-4',
-        'text-center'
-      );
-      errorMessageElement.style.display = 'block';
+      const errorMessageElement = document.getElementById("errorMessage");
+      errorMessageElement.classList.add("alert", "alert-danger", "mt-4", "text-center");
+      errorMessageElement.style.display = "block";
       errorMessageElement.innerHTML = messages;
     }
   } catch (err) {
-    console.error('An error occurred:', err);
-    alert('An error occurred: ' + err);
+    console.error("An error occurred:", err);
+    alert("An error occurred: " + err);
   }
 }
 /**
@@ -68,15 +63,15 @@ async function sendAuthRequest(endpoint, data) {
  */
 async function sendAuthRequestUpdateUserProfile(endpoint, data) {
   try {
-    console.log('sendAuthRequestUpdateUserProfile', data);
+    console.log("sendAuthRequestUpdateUserProfile", data);
     const response = await fetch(base_url + endpoint, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'X-Noroff-API-Key': '4f20fb44-3b03-4fc3-bc21-5a7fb98d9816',
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "X-Noroff-API-Key": "4f20fb44-3b03-4fc3-bc21-5a7fb98d9816"
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     });
 
     if (response.ok) {
@@ -84,31 +79,23 @@ async function sendAuthRequestUpdateUserProfile(endpoint, data) {
       const token = result.data.accessToken;
       const nameApi = result.data.name;
 
-      window.location.href = '../account/profile.html';
+      window.location.href = "../account/profile.html";
     } else {
       const error = await response.json();
-      let messages = '';
+      let messages = "";
       for (let i = 0; i < error.errors.length; i++) {
-        messages += error.errors[i].message + '<br>';
+        messages += error.errors[i].message + "<br>";
       }
-      messages =
-        !messages || messages.length === 0
-          ? 'An error occurred. Please try again '
-          : messages;
+      messages = !messages || messages.length === 0 ? "An error occurred. Please try again " : messages;
 
-      const errorMessageElement = document.getElementById('errorMessage');
-      errorMessageElement.classList.add(
-        'alert',
-        'alert-danger',
-        'mt-4',
-        'text-center'
-      );
-      errorMessageElement.style.display = 'block';
+      const errorMessageElement = document.getElementById("errorMessage");
+      errorMessageElement.classList.add("alert", "alert-danger", "mt-4", "text-center");
+      errorMessageElement.style.display = "block";
       errorMessageElement.innerHTML = messages;
     }
   } catch (err) {
-    console.error('An error occurred:', err);
-    alert('An error occurred: ' + err);
+    console.error("An error occurred:", err);
+    alert("An error occurred: " + err);
   }
 }
 
@@ -124,33 +111,24 @@ async function sendAuthRequestUpdateUserProfile(endpoint, data) {
  * @param {string} bannerAltText - The user's bannerAltText.
  * @returns {void}
  */
-export function registerUser(
-  name,
-  email,
-  password,
-  bio,
-  avatarUrl,
-  avatarAltText,
-  bannerUrl,
-  bannerAltText
-) {
+export function registerUser(name, email, password, bio, avatarUrl, avatarAltText, bannerUrl, bannerAltText) {
   const userData = {
     name,
     email,
-    password,
+    password
   };
 
   if (avatarUrl && avatarAltText) {
     userData.avatar = {
       url: avatarUrl,
-      alt: avatarAltText,
+      alt: avatarAltText
     };
   }
 
   if (bannerUrl && bannerAltText) {
     userData.banner = {
       url: bannerUrl,
-      alt: bannerAltText,
+      alt: bannerAltText
     };
   }
 
@@ -158,7 +136,7 @@ export function registerUser(
     userData.bio = bio;
   }
 
-  return sendAuthRequest('/auth/register', userData);
+  return sendAuthRequest("/auth/register", userData);
 }
 
 /**
@@ -168,7 +146,7 @@ export function registerUser(
  * @returns {void}
  */
 export function loginUser(email, password) {
-  return sendAuthRequest('/auth/login', { email, password });
+  return sendAuthRequest("/auth/login", { email, password });
 }
 
 /**
@@ -182,28 +160,20 @@ export function loginUser(email, password) {
  * @param {string} bannerAltText - The user's bannerAltText.
  * @returns {void}
  */
-export function updateUserProfile(
-  name,
-  email,
-  bio,
-  avatarUrl,
-  avatarAltText,
-  bannerUrl,
-  bannerAltText
-) {
+export function updateUserProfile(name, email, bio, avatarUrl, avatarAltText, bannerUrl, bannerAltText) {
   const userData = {};
 
   if (avatarUrl && avatarAltText) {
     userData.avatar = {
       url: avatarUrl,
-      alt: avatarAltText,
+      alt: avatarAltText
     };
   }
 
   if (bannerUrl && bannerAltText) {
     userData.banner = {
       url: bannerUrl,
-      alt: bannerAltText,
+      alt: bannerAltText
     };
   }
 

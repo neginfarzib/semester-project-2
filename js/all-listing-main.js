@@ -1,4 +1,5 @@
 import { allListings, searchListingAPI } from "./manage-all-listings.js";
+import { fetchUserProfile } from "./profile.js";
 const base_url = "https://v2.api.noroff.dev";
 const options = {
   year: "numeric",
@@ -16,7 +17,8 @@ const options = {
  * */
 export async function dateSortedAllListings() {
   let listings = await allListings();
-  let sortedAllListings = listings.data.sort((a, b) => new Date(b.created) - new Date(a.created));
+  // @ts-ignore
+  let sortedAllListings = listings.data.sort((a, b) => new Date(b.endsAt) - new Date(a.endsAt));
   return sortedAllListings;
 }
 
@@ -67,6 +69,7 @@ function showSkeletons(container, count = 3) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const listingThumbnail = document.getElementById("listing-container");
+  const userProfile = await fetchUserProfile();
 
   showSkeletons(listingThumbnail);
 
@@ -76,6 +79,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function displayListings(listings) {
     listingThumbnail.innerHTML = "";
+
+    // Set credit
+    const userCreditElement = document.getElementById("user-credit");
+    if (userCreditElement && userProfile) {
+      userCreditElement.classList.add("badge", "bg-success", "rounded-pill");
+      userCreditElement.textContent = "credit: " + userProfile.credits;
+    }
 
     const inputSearchListingsDiv = document.createElement("div");
     inputSearchListingsDiv.classList.add("w-75", "mx-auto", "mb-4", "my-4");
@@ -118,7 +128,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const listingThumbnailContainerRow = document.createElement("div");
     listingThumbnailContainerRow.classList.add("row", "g-3", "justify-content-center");
 
-    listingToShow.forEach(listing => {
+    listingToShow.forEach(async (listing) => {
       const blogThumbnail = document.createElement("div");
       blogThumbnail.classList.add("col-12", "col-sm-6", "col-md-4", "col-lg-3", "card", "mx-3", "shadow", "mb-4", "justify-content-center");
 
@@ -136,13 +146,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       blogThumbnailHref.appendChild(listingTitle);
 
       if (listing.media) {
-    
-          const listingImage = document.createElement("img");
-          listingImage.classList.add("card-img-top", "rounded", "mb-2");
-          listingImage.src = listing.media[0]?.url || "";
-          listingImage.alt = listing.media[0]?.alt || "";
-          blogThumbnailHref.appendChild(listingImage);
-      
+        const listingImage = document.createElement("img");
+        listingImage.classList.add("card-img-top", "rounded", "mb-2");
+        listingImage.src = listing.media[0]?.url || "";
+        listingImage.alt = listing.media[0]?.alt || "";
+        blogThumbnailHref.appendChild(listingImage);
+
         // listing.media.forEach(item => {
         //   const listingImage = document.createElement("img");
         //   listingImage.classList.add("card-img-top", "rounded", "mb-2");
@@ -155,8 +164,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (listing.seller) {
         const sellerHref = document.createElement("a");
         sellerHref.classList.add("text-decoration-none", "text-dark", "d-flex", "align-items-center", "mb-2");
-        // sellerHref.href =
-        //   'post/user-posts.html?name-of-user=' + listing.seller.name;
 
         const listingAuthorIcon = document.createElement("img");
         listingAuthorIcon.src = "assets/person-icon.svg";
@@ -184,48 +191,52 @@ document.addEventListener("DOMContentLoaded", async () => {
       listingEndTimeDiv.appendChild(listingEndTimeText);
 
       const listingEndTime = document.createElement("p");
-      listingEndTime.classList.add("text-muted", "small", "mb-0");
       const date = new Date(listing.endsAt);
-      listingEndTime.textContent = date.toLocaleDateString("en-US", options);
-      listingEndTimeDiv.appendChild(listingEndTime);
+      const now = new Date();
+      if (date > now) {
+        listingEndTime.classList.add("text-muted", "small", "mb-0");
+        listingEndTime.textContent = date.toLocaleDateString("en-US", options);
+        listingEndTimeDiv.appendChild(listingEndTime);
+      } else {
+        listingEndTime.classList.add("small", "mb-0", "text-danger");
+        listingEndTime.textContent = 'Ended !'
+        listingEndTimeDiv.appendChild(listingEndTime);
+      }
 
       blogThumbnailHref.appendChild(listingEndTimeDiv);
-      
+
       // Bids
       const listingBidsDiv = document.createElement("div");
       listingBidsDiv.classList.add("align-items-center", "mb-3");
 
       if (listing.bids && listing.bids.length > 0) {
-      const blogListingSorted = listing.bids.sort((a, b) => b.amount - a.amount);
+        const blogListingSorted = listing.bids.sort((a, b) => b.amount - a.amount);
 
-      blogListingSorted.forEach(bid => {
-        const listItem = document.createElement("li");
-        listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+        blogListingSorted.forEach((bid) => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
 
-        const bidderSpan = document.createElement("span");
-        bidderSpan.textContent = bid.bidder.name;
-        bidderSpan.classList.add("text-muted", "small", "mb-0");
-    
-        listItem.appendChild(bidderSpan);
+          const bidderSpan = document.createElement("span");
+          bidderSpan.textContent = bid.bidder.name;
+          bidderSpan.classList.add("text-muted", "small", "mb-0");
 
-        const bidsListSpan = document.createElement("span");
-        bidsListSpan.classList.add("text-muted", "small", "mb-0");
+          listItem.appendChild(bidderSpan);
 
-        bidsListSpan.textContent = `${bid.amount} credit`;
-        listItem.appendChild(bidsListSpan);
+          const bidsListSpan = document.createElement("span");
+          bidsListSpan.classList.add("text-muted", "small", "mb-0");
 
-        listingBidsDiv.appendChild(listItem);
-      });
-    } else {
-      const noBidsItem = document.createElement("li");
-      noBidsItem.classList.add("list-group-item", "text-muted");
-      noBidsItem.textContent = "No bids placed yet.";
-      listingBidsDiv.appendChild(noBidsItem);
-    }
-    blogThumbnailHref.appendChild(listingBidsDiv);
+          bidsListSpan.textContent = `${bid.amount} credit`;
+          listItem.appendChild(bidsListSpan);
 
-
-
+          listingBidsDiv.appendChild(listItem);
+        });
+      } else {
+        const noBidsItem = document.createElement("li");
+        noBidsItem.classList.add("list-group-item", "text-muted");
+        noBidsItem.textContent = "No bids placed yet.";
+        listingBidsDiv.appendChild(noBidsItem);
+      }
+      blogThumbnailHref.appendChild(listingBidsDiv);
 
       const listingContent = document.createElement("p");
       listingContent.classList.add("card-text");

@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   blogPostDetailsImgUrl.textContent = imageUrlText;
 
   const blogPostDetailsBody = document.getElementById("blog-post-edit-body");
-  blogPostDetailsBody.textContent = blogPost.body;
+  blogPostDetailsBody.textContent = blogPost.description;
 
   const blogPostEditTags = document.getElementById("blog-post-edit-tags");
   blogPostEditTags.value = blogPost.tags;
