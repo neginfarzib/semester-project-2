@@ -126,8 +126,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const listingContent = document.createElement("p");
       listingContent.classList.add("card-text");
-      listingContent.textContent = listing.body?.split(/\s+/).slice(0, 50).join(" ") || "";
+      listingContent.textContent = listing.description?.split(/\s+/).slice(0, 50).join(" ") || "";
       blogThumbnailHref.appendChild(listingContent);
+
+      //  Number of bids
+      const listingNumberBidsDiv = document.createElement('div');
+      listingNumberBidsDiv.classList.add('d-flex', 'align-items-center');
+      const listingNumberBidsSpanText = document.createElement('span');
+      listingNumberBidsSpanText.classList.add("me-1");
+      listingNumberBidsSpanText.textContent = "Number of Bids: ";
+      listingNumberBidsDiv.appendChild(listingNumberBidsSpanText);
+
+      const listingNumberBidsSpanValue = document.createElement('span');
+      listingNumberBidsSpanValue.classList.add("col-4");
+      listingNumberBidsSpanValue.textContent = listing._count.bids;
+      listingNumberBidsDiv.appendChild(listingNumberBidsSpanValue);
+
+      blogThumbnailHref.appendChild(listingNumberBidsDiv);
 
       const listingReadMore = document.createElement("p");
       listingReadMore.classList.add("text-primary", "fw-semibold");
@@ -205,7 +220,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (profileListingIds.has(profile.listing.id)) {
         console.log("This listing already exist", profile.listing.id);
         return;
-      }else{
+      } else {
         profileListingIds.add(profile.listing.id);
       }
       const blogThumbnail = document.createElement("div");

@@ -26,13 +26,15 @@ export async function editBlogListing(title, body, url,  tags, listingId, endAt)
   }
 
   const urls = url.split("\n").filter(u => u.trim() !== "");
-
+  
   postData.media = urls.map(urlAlt => ({
     alt: urlAlt.split("|")[1].trim(),
     url: urlAlt.split("|")[0].trim()
   }));
+  
+  // In the API there is not possible to update end date
+  // postData.endsAt = endAt;
 
-  postData.endsAt = endAt;
 
   try {
     let url = `${base_url}/auction/listings/${listingId}`;

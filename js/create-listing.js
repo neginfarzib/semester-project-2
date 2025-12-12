@@ -49,8 +49,8 @@ export async function createBlogListing(title, body, url, tags, endDateTime) {
     });
 
     if (response.ok) {
-      console.log("Blog post created successfully.");
       const result = await response.json();
+      console.log("Blog post created successfully.", result);
       window.location.href = "../account/profile.html";
     } else {
       console.log("Failed to create blog post.");
