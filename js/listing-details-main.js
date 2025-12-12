@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log(blogListing);
     // Replace skeleton with real content
     blogListingContainer.innerHTML = `
-      <div class="card shadow w-75 mx-auto my-5 p-4">
+      <div class="card shadow w-100 w-md-75 mx-auto my-3 p-4">
         <h2 id="blog-listing-details-title" class="card-title mb-3 text-center"></h2>
         <img id="blog-listing-details-img" class="card-img-top rounded mb-4" src="" alt="">
         <div id="blog-listing-details-img-second" class="d-flex flex-wrap mb-4"></div>
@@ -223,12 +223,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const bidderSpan = document.createElement("span");
         bidderSpan.textContent = bid.bidder.name;
-        bidderSpan.style.minWidth = "150px";
+        bidderSpan.style.minWidth = "90px";
 
         // Create a span for date with faded color and smaller text
         const dateSpan = document.createElement("span");
         dateSpan.textContent = formatedCreateDate;
-        dateSpan.classList.add("text-muted", "small");
+        dateSpan.classList.add("text-muted", "small", 'me-3');
 
         // Append spans to list item
         listItem.appendChild(bidderSpan);
