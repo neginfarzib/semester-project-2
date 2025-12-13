@@ -86,7 +86,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log(blogListing);
     // Replace skeleton with real content
     blogListingContainer.innerHTML = `
-      <div class="card shadow w-100 w-md-75 mx-auto my-3 p-4">
+    <div class="row justify-content-center">
+    <div class="col-12 col-lg-9">
+      <div class="card shadow my-3 p-4">
         <h2 id="blog-listing-details-title" class="card-title mb-3 text-center"></h2>
         <img id="blog-listing-details-img" class="card-img-top rounded mb-4" src="" alt="">
         <div id="blog-listing-details-img-second" class="d-flex flex-wrap mb-4"></div>
@@ -121,6 +123,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             <p id="errorMessage"></p>
         </div>
        </form>
+      </div>
+      </div>
       </div>
     `;
 

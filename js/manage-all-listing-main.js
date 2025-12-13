@@ -67,6 +67,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     userCreditElement.textContent = "credit: " + userProfile.credits;
   }
 
+  let isWiningListing = true;
+
   const listings = await allUsersListings(nameUser);
   if (listings != null && listings.data.length > 0) {
     displayListings(editListingsThumbnail, listings.data);
@@ -81,7 +83,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (bidsListings != null && bidsListings.data.length > 0) {
     console.log(bidsListings);
-    displayProfileListing(myBidsThumbnail, bidsListings.data);
+    isWiningListing = false;
+    displayProfileListing(myBidsThumbnail, bidsListings.data, isWiningListing);
   } else {
     myBidsThumbnail.innerHTML = "";
     myBidsThumbnail.textContent = "No bids data";
@@ -93,13 +96,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (winsListings != null && winsListings.data.length > 0) {
     console.log(winsListings);
-    displayListings(myWinsThumbnail, winsListings.data);
+    isWiningListing = true;
+    displayListings(myWinsThumbnail, winsListings.data, isWiningListing);
   } else {
     myWinsThumbnail.innerHTML = "";
     myWinsThumbnail.textContent = "No bids data";
   }
 
-  function displayListings(ListingsThumbnail, listings) {
+  function displayListings(ListingsThumbnail, listings, isWiningListing) {
     ListingsThumbnail.innerHTML = "";
     listings.forEach((listing) => {
       const blogThumbnail = document.createElement("div");
@@ -130,14 +134,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       blogThumbnailHref.appendChild(listingContent);
 
       //  Number of bids
-      const listingNumberBidsDiv = document.createElement('div');
-      listingNumberBidsDiv.classList.add('d-flex', 'align-items-center');
-      const listingNumberBidsSpanText = document.createElement('span');
+      const listingNumberBidsDiv = document.createElement("div");
+      listingNumberBidsDiv.classList.add("d-flex", "align-items-center");
+      const listingNumberBidsSpanText = document.createElement("span");
       listingNumberBidsSpanText.classList.add("me-1");
       listingNumberBidsSpanText.textContent = "Number of Bids: ";
       listingNumberBidsDiv.appendChild(listingNumberBidsSpanText);
 
-      const listingNumberBidsSpanValue = document.createElement('span');
+      const listingNumberBidsSpanValue = document.createElement("span");
       listingNumberBidsSpanValue.classList.add("col-4");
       listingNumberBidsSpanValue.textContent = listing._count.bids;
       listingNumberBidsDiv.appendChild(listingNumberBidsSpanValue);
@@ -153,53 +157,55 @@ document.addEventListener("DOMContentLoaded", async () => {
       blogThumbnail.appendChild(blogThumbnailDiv);
 
       /* banner */
-      const createListingThumbnailBannerDiv = document.createElement("div");
-      createListingThumbnailBannerDiv.classList.add("d-flex", "justify-content-between", "align-items-center", "gap-3", "p-2", "rounded");
-      createListingThumbnailBannerDiv.style.backgroundColor = "#A8A3A7";
+      if (!isWiningListing) {
+        const createListingThumbnailBannerDiv = document.createElement("div");
+        createListingThumbnailBannerDiv.classList.add("d-flex", "justify-content-between", "align-items-center", "gap-3", "p-2", "rounded");
+        createListingThumbnailBannerDiv.style.backgroundColor = "#A8A3A7";
 
-      const listingBannerHrefEdit = document.createElement("a");
-      listingBannerHrefEdit.href = "../listing/edit.html?blog-listing-id=" + listing.id;
-      listingBannerHrefEdit.classList.add("btn", "btn-outline-secondary", "btn-sm", "p-2");
-      const listingImageBannerEdit = document.createElement("img");
-      listingImageBannerEdit.classList.add("creat-listing-thumbnail-banner-img");
-      listingImageBannerEdit.src = "../assets/pen.svg";
-      listingImageBannerEdit.alt = "edit";
-      listingImageBannerEdit.width = "20";
-      listingImageBannerEdit.height = "20";
-      listingBannerHrefEdit.appendChild(listingImageBannerEdit);
-      createListingThumbnailBannerDiv.appendChild(listingBannerHrefEdit);
+        const listingBannerHrefEdit = document.createElement("a");
+        listingBannerHrefEdit.href = "../listing/edit.html?blog-listing-id=" + listing.id;
+        listingBannerHrefEdit.classList.add("btn", "btn-outline-secondary", "btn-sm", "p-2");
+        const listingImageBannerEdit = document.createElement("img");
+        listingImageBannerEdit.classList.add("creat-listing-thumbnail-banner-img");
+        listingImageBannerEdit.src = "../assets/pen.svg";
+        listingImageBannerEdit.alt = "edit";
+        listingImageBannerEdit.width = "20";
+        listingImageBannerEdit.height = "20";
+        listingBannerHrefEdit.appendChild(listingImageBannerEdit);
+        createListingThumbnailBannerDiv.appendChild(listingBannerHrefEdit);
 
-      const listingBannerHrefView = document.createElement("a");
-      listingBannerHrefView.href = "../listing/index.html?blog-listing-id=" + listing.id;
-      listingBannerHrefView.classList.add("btn", "btn-outline-secondary", "btn-sm", "p-2");
-      // listingBannerHrefView.target = '_blank';
-      const listingImageBannerView = document.createElement("img");
-      listingImageBannerView.classList.add("creat-listing-thumbnail-banner-img");
-      listingImageBannerView.src = "../assets/eye.svg";
-      listingImageBannerView.alt = "view";
-      listingImageBannerView.width = "20";
-      listingImageBannerView.height = "20";
-      listingBannerHrefView.appendChild(listingImageBannerView);
-      createListingThumbnailBannerDiv.appendChild(listingBannerHrefView);
+        const listingBannerHrefView = document.createElement("a");
+        listingBannerHrefView.href = "../listing/index.html?blog-listing-id=" + listing.id;
+        listingBannerHrefView.classList.add("btn", "btn-outline-secondary", "btn-sm", "p-2");
+        // listingBannerHrefView.target = '_blank';
+        const listingImageBannerView = document.createElement("img");
+        listingImageBannerView.classList.add("creat-listing-thumbnail-banner-img");
+        listingImageBannerView.src = "../assets/eye.svg";
+        listingImageBannerView.alt = "view";
+        listingImageBannerView.width = "20";
+        listingImageBannerView.height = "20";
+        listingBannerHrefView.appendChild(listingImageBannerView);
+        createListingThumbnailBannerDiv.appendChild(listingBannerHrefView);
 
-      const listingBannerHrefDelete = document.createElement("a");
-      listingBannerHrefDelete.classList.add("btn", "btn-outline-secondary", "btn-sm", "p-2");
-      listingBannerHrefDelete.href = "#rr";
-      listingBannerHrefDelete.onclick = function (event) {
-        event.preventDefault();
+        const listingBannerHrefDelete = document.createElement("a");
+        listingBannerHrefDelete.classList.add("btn", "btn-outline-secondary", "btn-sm", "p-2");
+        listingBannerHrefDelete.href = "#rr";
+        listingBannerHrefDelete.onclick = function (event) {
+          event.preventDefault();
 
-        deleteBlogListing(listing.id);
-      };
-      const listingImageBannerDelete = document.createElement("img");
-      listingImageBannerDelete.classList.add("creat-listing-thumbnail-banner-img");
-      listingImageBannerDelete.src = "../assets/bin.svg";
-      listingImageBannerDelete.alt = "delete";
-      listingImageBannerDelete.width = "20";
-      listingImageBannerDelete.height = "20";
-      listingBannerHrefDelete.appendChild(listingImageBannerDelete);
-      createListingThumbnailBannerDiv.appendChild(listingBannerHrefDelete);
+          deleteBlogListing(listing.id);
+        };
+        const listingImageBannerDelete = document.createElement("img");
+        listingImageBannerDelete.classList.add("creat-listing-thumbnail-banner-img");
+        listingImageBannerDelete.src = "../assets/bin.svg";
+        listingImageBannerDelete.alt = "delete";
+        listingImageBannerDelete.width = "20";
+        listingImageBannerDelete.height = "20";
+        listingBannerHrefDelete.appendChild(listingImageBannerDelete);
+        createListingThumbnailBannerDiv.appendChild(listingBannerHrefDelete);
 
-      blogThumbnail.appendChild(createListingThumbnailBannerDiv);
+        blogThumbnail.appendChild(createListingThumbnailBannerDiv);
+      }
 
       // Append the product box to the container
       ListingsThumbnail.appendChild(blogThumbnail);
