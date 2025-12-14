@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Create a span for date with faded color and smaller text
         const dateSpan = document.createElement("span");
         dateSpan.textContent = formatedCreateDate;
-        dateSpan.classList.add("text-muted", "small", 'me-3');
+        dateSpan.classList.add("text-muted", "small", "me-3");
 
         // Append spans to list item
         listItem.appendChild(bidderSpan);
