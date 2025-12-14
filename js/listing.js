@@ -17,7 +17,6 @@ export async function placeBidAPI(bidAmount, listingId) {
     amount: bidAmount
   };
   const url = `${base_url}/auction/listings/${listingId}/bids`;
-  console.log("ØØØØØØ", JSON.stringify(userData));
   const response = await fetch(url, {
     method: "POST",
     headers: {

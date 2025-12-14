@@ -74,7 +74,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   showSkeletons(listingThumbnail);
 
   const listings = await dateSortedAllListings();
-  console.log(listings.length);
   displayListings(listings);
 
   function displayListings(listings) {

@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   postId = params.get("blog-listing-id");
 
   const blogPost = await getBlogListing(postId);
-  console.log(blogPost);
 
   const blogPostDetailsTitle = document.getElementById("blog-post-edit-title");
   blogPostDetailsTitle.value = blogPost.title;

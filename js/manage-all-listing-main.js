@@ -82,7 +82,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const bidsListings = await allUsersBids(nameUser);
 
   if (bidsListings != null && bidsListings.data.length > 0) {
-    console.log(bidsListings);
     isWiningListing = false;
     displayProfileListing(myBidsThumbnail, bidsListings.data, isWiningListing);
   } else {
@@ -95,7 +94,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const winsListings = await allUsersWins(nameUser);
 
   if (winsListings != null && winsListings.data.length > 0) {
-    console.log(winsListings);
     isWiningListing = true;
     displayListings(myWinsThumbnail, winsListings.data, isWiningListing);
   } else {

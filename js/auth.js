@@ -63,7 +63,6 @@ async function sendAuthRequest(endpoint, data) {
  */
 async function sendAuthRequestUpdateUserProfile(endpoint, data) {
   try {
-    console.log("sendAuthRequestUpdateUserProfile", data);
     const response = await fetch(base_url + endpoint, {
       method: "PUT",
       headers: {

@@ -83,7 +83,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const createdDate = new Date(blogListing.created);
     const endDate = new Date(blogListing.endsAt);
 
-    console.log(blogListing);
     // Replace skeleton with real content
     blogListingContainer.innerHTML = `
     <div class="row justify-content-center">

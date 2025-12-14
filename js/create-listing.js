@@ -32,7 +32,6 @@ export async function createBlogListing(title, body, url, tags, endDateTime) {
   postData.endsAt = endDateTime;
 
   try {
-    console.log("Creating blog post...", postData);
     const nameUser = localStorage.getItem("name");
     if (nameUser == null) {
       throw new Error("Need to login again");
@@ -50,7 +49,6 @@ export async function createBlogListing(title, body, url, tags, endDateTime) {
 
     if (response.ok) {
       const result = await response.json();
-      console.log("Blog post created successfully.", result);
       window.location.href = "../account/profile.html";
     } else {
       console.log("Failed to create blog post.");
