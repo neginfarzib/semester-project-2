@@ -1,5 +1,4 @@
 import { loginUser } from './auth.js';
-import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const form = document.getElementById('login-form');
 const spinner = document.getElementById('loading-spinner');
