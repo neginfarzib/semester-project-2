@@ -56,7 +56,12 @@
 
                         <div class="mb-3">
                             <label for="imageUrl" class="form-label fw-bold">Image URLs and Alt text(one per line)</label>
-                            <textarea type="text" rows="3" id="imageUrl" class="form-control" placeholder="https://example.com/image1.jpg|Alt text 1&#10;https://example.com/image2.jpg|Alt text 2"></textarea>
+                            <textarea type="text" rows="3" id="imageUrl" class="form-control" aria-describedby="imageUrlHelp"></textarea>
+                              <div id="imageUrlHelp" class="form-text">
+                                Example:<br>
+                                https://example.com/image1.jpg | Alt text 1<br>
+                                https://example.com/image2.jpg | Alt text 2
+                            </div>
                         </div>
 
 
